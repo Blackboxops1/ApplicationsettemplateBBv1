@@ -16,7 +16,6 @@ spec:
           repoURL: https://github.com/Blackboxops1/ApplicationsettemplateBBv1.git
           revision: HEAD
           directories:
-            - path: mail/mailhog
             - path: mail/stunnel
   template:
     metadata:
