@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: power-lilac-set
+  name: power-lilac-set2
   namespace: argocd
 spec:
   generators:
