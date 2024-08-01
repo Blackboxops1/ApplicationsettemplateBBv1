@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: vulnerability-test
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+      - list:
+          elements:
+          # - namespace: dev
+          - namespace: stage
+          # - namespace: prod
+      - git:
+          repoURL: https://github.com/Blackboxops1/ApplicationsettemplateBBv1.git
+          revision: HEAD
+          directories:
+            - path: deployment/dependencytrack
+            - path: deployment/betterscan
+            - path: deployment/neuvector
+  template:
+    metadata:
+      name: '{{path.basename}}-{{namespace}}-application'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/Blackboxops1/ApplicationsettemplateBBv1.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}-{{path.basename}}-ns'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
