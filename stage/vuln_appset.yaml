@@ -19,6 +19,8 @@ spec:
             - path: deployment/dependencytrack
             - path: deployment/betterscan
             - path: deployment/neuvector
+            - path: deployment/grype
+            - path: deployment/atlasgo
   template:
     metadata:
       name: '{{path.basename}}-{{namespace}}-application'
